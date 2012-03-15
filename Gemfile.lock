@@ -210,6 +210,7 @@ DEPENDENCIES
   factory_girl
   guard-rspec
   jquery-rails
+  meta_search (>= 1.1.0.pre)
   mysql2
   paperclip (~> 2.4)
   rails (= 3.2.1)
