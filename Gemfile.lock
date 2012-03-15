@@ -73,7 +73,9 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.1.0)
+    mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
+    nokogiri (1.5.2)
     nokogiri (1.5.2-x86-mingw32)
     paperclip (2.7.0)
       activerecord (>= 2.3.0)
@@ -150,6 +152,7 @@ GEM
       nokogiri (~> 1.3)
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
