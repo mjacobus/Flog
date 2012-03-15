@@ -7,7 +7,7 @@ gem 'rails', '3.2.1'
 
 gem 'mysql2'
 
-gem "paperclip", "~> 2.4"
+gem 'paperclip', '~> 2.4'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,6 +22,19 @@ group :assets do
 end
 
 gem 'jquery-rails'
+
+group :development, :test do
+  gem 'ruby-prof'
+  gem 'guard-rspec'  
+  gem 'rspec-rails', '~> 2.6'
+  gem 'capybara'
+end
+
+group :test do
+  # Pretty printed test output
+  gem 'turn', '0.8.2', :require => false
+  gem 'factory_girl'
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
