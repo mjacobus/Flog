@@ -24,6 +24,7 @@ ActiveAdmin.register Post do
         end
         
         row :description
+        row :slug
         row :created_at
         row :updated_at
       end
@@ -43,6 +44,7 @@ ActiveAdmin.register Post do
     end
     
     column :title
+    column :slug
     column :created_at
     column :updated_at
     column :file_updated_at
