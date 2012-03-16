@@ -21,4 +21,11 @@ class Post < ActiveRecord::Base
     self[:title] = value
     self[:slug] = value ? value.to_slug : nil 
   end
+  
+  # scopes
+  def self.published
+    where('publish = ?', true)
+      .where('publication_date <= ?', Time.now)
+      .order('publication_date DESC')
+  end
 end

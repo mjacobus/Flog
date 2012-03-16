@@ -44,4 +44,23 @@ describe Post do
         end
       end 
   end
+  
+  context "scope published" do
+    before do
+      # 10 posts per page
+      # 21 posts
+      # 16 with publication date <= today
+      # 15 with publication date <= today AND publish == true
+      # 10 posts 1st page
+      # 5 posts 2nd page
+      Factory(:post, :publish => false)
+      1.upto(20) do |n|
+        Factory(:post, :publication_date => 15.days.ago + n.days)
+      end
+    end
+    
+    it "should get 16 valid posts" do
+      Post.published.length == 15
+    end
+  end
 end
