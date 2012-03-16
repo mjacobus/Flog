@@ -1,9 +1,11 @@
 ActiveAdmin.register Post do
-  
+
   # form
   form :html => { :enctype => "multipart/form-data" } do |f|
+    f.object.publication_date = Time.now if f.object.new_record?
     f.inputs do
       f.input :publish
+      f.input :publication_date
       f.input :title
       f.input :description
       f.input :file, :as => :file,
@@ -13,11 +15,12 @@ ActiveAdmin.register Post do
     f.buttons
   end
   
-  # sho
+  # show
   show do |post|
     panel(post.title) do
       attributes_table_for post do
         row :publish
+        row :publication_date
         
         row "File" do
           img :src => post.file.url(:medium), :title => "Updated at: #{post.file_updated_at}"
@@ -33,10 +36,9 @@ ActiveAdmin.register Post do
   end
   
   # index
-  
-  # listing
   index do
     column :publish
+    column :publication_date
     column "File" do |post|
       div :class => "logo thumb" do
         img :src => post.file.url(:thumb), :alt => post.title, :title => post.title
