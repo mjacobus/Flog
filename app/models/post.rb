@@ -22,15 +22,40 @@ class Post < ActiveRecord::Base
     self[:slug] = value ? value.to_slug : nil 
   end
   
-  # scopes
-  def self.published
-    where('publish = ?', true)
+  # accepts params year, month, day
+  # will accept params: tag
+  # list published posts
+  def self.published(params = {})
+    query = where('publish = ?', true)   
       .where('publication_date <= ?', Time.now)
       .order('publication_date DESC')
+      
+    year  = params[:year].to_i  if params[:year]
+    month = params[:month].to_i if params[:month]
+    day   = params[:day].to_i   if params[:day]
+    
+    ################
+    # query by date
+    ################ 
+    if day 
+      date = Date.new(year, month, day)    
+    elsif month # query the intire month
+      init_date = Date.new year, month, 1
+      end_date = (init_date + 1.month) - 1.day
+    elsif year # query for an intire year
+      # first day of the given year
+      init_date = Date.new year, 1, 1
+      # last day of the given year 
+      end_date = (Date.new year + 1) - 1.day
+    end
+   
+    if date
+      query = query.where('publication_date = ?', date )
+    elsif init_date && end_date
+      query = query.where('publication_date >= ? AND publication_date <= ?', init_date, end_date )
+    end
+    
+    query
   end
-  
-  # list published posts
-  def self.list(params = {})
-    published
-  end
+
 end
