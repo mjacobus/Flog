@@ -56,11 +56,44 @@ describe Post do
       Factory(:post, :publish => false)
       1.upto(20) do |n|
         Factory(:post, :publication_date => 15.days.ago + n.days)
+        Factory(:post, :publication_date => n.days.from_now)
       end
     end
     
-    it "should get 16 valid posts" do
+    it "should get 15 valid posts" do
       Post.published.length == 15
     end
+  end
+  
+  context "list" do
+     before do
+      
+      # today = 2012-03-19
+      
+      
+      1.upto(15) do |day|
+        # 15 1 year old posts + 15 unpublilshed
+        Factory(:post, :publication_date => "2011-01-#{day}")
+        Factory(:post, :publication_date => "2011-01-#{day}", :publish => false)
+        # 15 2 months old posts  + 15 unpublished
+        Factory(:post, :publication_date => "2012-02-#{day}")
+        Factory(:post, :publication_date => "2012-02-#{day}", :publish => false)
+        # 15 1 month old posts  + 15 unpublished
+        Factory(:post, :publication_date => "2012-03-#{day}")
+        Factory(:post, :publication_date => "2012-03-#{day}", :publish => false)
+        # 15 todays post  + 15 unpublished
+        Factory(:post, :publication_date => "2012-03-19")
+        Factory(:post, :publication_date => "2012-03-19", :publish => false)
+        # 15 posts in the future        
+        Factory(:post, :publication_date => 1.month.from_now)
+      end
+    end
+    
+    
+    it "list(:year => #{2012})).length should be 45" do
+      pending "implement"
+      # Post.list(:year => '2012').length.should == 45
+    end
+  
   end
 end

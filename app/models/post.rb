@@ -28,4 +28,9 @@ class Post < ActiveRecord::Base
       .where('publication_date <= ?', Time.now)
       .order('publication_date DESC')
   end
+  
+  # list published posts
+  def self.list(params = {})
+    published
+  end
 end
