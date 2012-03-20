@@ -1,6 +1,8 @@
 class PostsController < ApplicationController
   
   def index
-    @posts = Post.published(params).page(1).per(10)
+    page = params[:page]  || 1
+    per  = params[:limit] || 10
+    @posts = Post.published(params).page(page).per(per)
   end
 end
