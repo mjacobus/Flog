@@ -1,0 +1,13 @@
+<h1>Flog Title</h1>
+
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <h2><%= post.title %></h2>
+    <div class="image"><%= image_tag post.file.url(:medium), :alt => post.title, :title => post.title %></div>
+    <div class="description"><p><%= simple_format(post.description) %></p></div>
+    <div class="publication_date">
+      <p>Posted on <strong><%= post.publication_date %></strong></p>
+    </div>
+  </div>
+<% end %>
