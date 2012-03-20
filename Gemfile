@@ -32,12 +32,12 @@ group :development, :test do
   gem 'guard-rspec'  
   gem 'rspec-rails', '~> 2.6'
   gem 'capybara'
+  gem 'factory_girl'
 end
 
 group :test do
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
-  gem 'factory_girl'
 end
 
 # To use ActiveModel has_secure_password
