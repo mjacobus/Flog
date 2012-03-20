@@ -2,15 +2,20 @@ require 'spec_helper'
 
 describe PostsController do
   before do
-    # 10 posts per page
-    # 21 posts
-    # 16 with publication date <= today
-    # 15 with publication date <= today AND publish == true
-    # 10 posts 1st page
-    # 5 posts 2nd page
-    Factory(:post, :publish => false)
-    1.upto(20) do |n|
-      Factory(:post, :publication_date => 15.days.ago + n.days)
+    # considering today was 2012-03-19
+    1.upto(15) do |day|
+      # 15 1 year old posts + 15 unpublilshed
+      Factory(:post, :publication_date => "2011-03-#{day}")
+      Factory(:post, :publication_date => "2011-03-#{day}", :publish => false)
+      # 15 2 months old
+      Factory(:post, :publication_date => "2012-01-#{day}")
+      # + 30 2 months old posts  + 15 unpublished
+      Factory(:post, :publication_date => "2012-02-#{day}")
+      Factory(:post, :publication_date => "2012-02-#{day}")
+      Factory(:post, :publication_date => "2012-02-#{day}", :publish => false)
+      
+      # 15 posts in the future        
+      Factory(:post, :publication_date => 1.month.from_now)
     end
   end
   
