@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
     # query by date
     ################ 
     if day 
-      date = Date.new(year, month, day)    
+      date = Date.new(year, month, day).to_s + "%"    
     elsif month # query the intire month
       init_date = Date.new year, month, 1
       end_date = (init_date + 1.month) - 1.day
@@ -50,7 +50,7 @@ class Post < ActiveRecord::Base
     end
    
     if date
-      query = query.where('publication_date = ?', date )
+      query = query.where('publication_date like ?', date )
     elsif init_date && end_date
       query = query.where('publication_date >= ? AND publication_date <= ?', init_date, end_date )
     end
