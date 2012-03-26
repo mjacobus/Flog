@@ -9,3 +9,8 @@ Factory.define :post do |f|
   f.publish           true
   f.sequence(:publication_date) {|n| 2.weeks.ago + n.days}
 end
+
+Factory.define :tag do |f|
+  f.sequence(:name) {|n| "tag #{n}"}
+  f.sequence(:slug) {|n| "tag-#{n}"}
+end
