@@ -24,4 +24,19 @@ describe Tag do
       
     end
   end
+  
+  context "posts count cache" do
+    before(:each) do
+#      1.upto(10) do
+        @tag = Factory(:tag)
+        @tag.posts << Factory(:post)
+        @tag.save
+ #     end
+    end
+    
+    it "must keep count of posts" do
+      @tag.posts_count.should == 10
+    end
+  
+  end
 end

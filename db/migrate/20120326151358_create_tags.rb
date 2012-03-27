@@ -4,6 +4,7 @@ class CreateTags < ActiveRecord::Migration
       t.string :name
       t.string :slug
       t.integer :count
+      t.integer :posts_count,:default => 0
 
       t.timestamps
     end
