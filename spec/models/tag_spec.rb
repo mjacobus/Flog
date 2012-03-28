@@ -21,21 +21,32 @@ describe Tag do
         @new_tag.should_not be_valid
         @new_tag.should have(1).errors_on(attr)        
       end
-      
     end
   end
   
   context "posts count cache" do
     before(:each) do
-#      1.upto(10) do
-        @tag = Factory(:tag)
+      @tag = Factory(:tag)
+      1.upto(10) do
         @tag.posts << Factory(:post)
-        @tag.save
- #     end
+      end
+      @tag.save
     end
     
-    it "must keep count of posts" do
+    it "should keep count of posts" do
       @tag.posts_count.should == 10
+    end
+    
+    it "should increase count of posts when a tag is added to a post" do
+      @post = Factory(:post)
+      @post.tags << @tag
+      @post.save
+      @tag.posts_count.should == 11
+    end
+    
+    it "should decrease count of posts a tag post is destroyed" do
+      @tag.posts.first.destroy
+      @tag.posts_count.should == 9
     end
   
   end
