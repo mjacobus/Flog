@@ -9,4 +9,9 @@ class Tag < ActiveRecord::Base
   validates :slug, 
     :presence => true, 
     :uniqueness => {:case_sensitive => false}  
+    
+  def update_posts_count
+    posts_count = posts.count
+    save
+  end
 end

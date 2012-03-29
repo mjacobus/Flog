@@ -1,7 +1,22 @@
 class Post < ActiveRecord::Base
-  has_many :post_tags, :dependent => :destroy
+  ##############################################################################
+  # Relations and callbacks
+  ##############################################################################  
+  has_many :post_tags
   has_many :tags, :through => :post_tags
+  
+  after_save    :update_tag_posts_count
+  after_destroy :update_tag_posts_count
+  
+  def update_tag_posts_count
+    tags.each do |tag|
+      tag.update_posts_count
+    end
+  end
 
+  ##############################################################################
+  # Attatchements
+  ##############################################################################
   has_attached_file :file,
     :styles => {
       :original => "1072x712>",
@@ -10,20 +25,30 @@ class Post < ActiveRecord::Base
       :thumb => "134x89>",
     }
 
+  ##############################################################################
+  # Validation
+  ##############################################################################
   validates_attachment_presence :file
   validates_attachment_content_type :file, :content_type => ['image/jpeg', 'image/png']
   # not working
   validates_attachment_size :file, :less_than => 5.megabytes
   
-  
   validates :title, :presence => true
   validates :slug, :presence => true, :uniqueness => {:case_sensitive => false}
+  
+  ##############################################################################
+  # Setters
+  ##############################################################################
   
   # set title and slug
   def title=(value)
     self[:title] = value
     self[:slug] = value ? value.to_slug : nil 
   end
+    
+  ##############################################################################
+  # Scopes
+  ##############################################################################
   
   # accepts params year, month, day
   # will accept params: tag
@@ -37,9 +62,7 @@ class Post < ActiveRecord::Base
     month = params[:month].to_i if params[:month]
     day   = params[:day].to_i   if params[:day]
     
-    ################
     # query by date
-    ################ 
     if day 
       date = Date.new(year, month, day).to_s + "%"    
     elsif month # query the intire month

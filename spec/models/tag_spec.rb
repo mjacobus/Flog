@@ -48,6 +48,13 @@ describe Tag do
       @tag.posts.first.destroy
       @tag.posts_count.should == 9
     end
-  
+    
+    it "should destroy tag after destroying all of its posts" do
+      lambda {
+        @tag.posts.each do |post|
+          post.destroy
+        end
+      }.should change(Tag, :count).by(-1)
+    end
   end
 end
