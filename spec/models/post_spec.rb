@@ -117,6 +117,44 @@ describe Post do
   end
   # publish with params
   
+  context "tags" do
+    it "can save post with text tags" do
+      lambda{
+        lambda {
+          attrs = Factory.attributes_for(:post)
+          attrs[:tags_as_string] = "Tag, tag 2, e uma outra tag"
+          Post.create!(attrs)
+        }.should change(Post,:count).by(1)
+      }.should   change(Tag, :count).by(3)
+    end
+    
+    it "can update tags as string" do
+      @post = Factory(:post)
+      @post.tags_as_string = "one, two, three"
+      @post.save!
+      
+      lambda{
+        @post.tags_as_string = "one, two, three, four"
+      }.should change(Tag, :count).by(1)
+    end
+    
+    it "can get tags as string" do
+      @tag =  Factory(:tag, :name => "a tag")
+      @tag2 = Factory(:tag, :name => "another tag")
+      @tag3 = Factory(:tag, :name => "yet another tag")
+      
+      @post = Factory(:post)
+      @post.tags << @tag
+      @post.tags << @tag2
+      @post.tags << @tag3
+            
+      @post.tags_as_string.should == "a tag, another tag, yet another tag"
+    end
+  end
+  
+  
+  
+  
 #  context "nested attributes" do
 #    context "tags" do
 #      before(:each) do

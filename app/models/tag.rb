@@ -21,4 +21,15 @@ class Tag < ActiveRecord::Base
       destroy
     end  
   end
+  
+  
+  def name=(name)
+    if name 
+      self[:name] = name
+      self[:slug] = name.to_slug
+    else
+      self[:name] = nil
+      self[:slug] = nil  
+    end
+  end
 end

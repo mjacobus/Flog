@@ -45,7 +45,7 @@ class Post < ActiveRecord::Base
   validates :slug, :presence => true, :uniqueness => {:case_sensitive => false}
   
   ##############################################################################
-  # Setters
+  # Setters/getters
   ##############################################################################
   
   # set title and slug
@@ -53,7 +53,21 @@ class Post < ActiveRecord::Base
     self[:title] = value
     self[:slug] = value ? value.to_slug : nil 
   end
-    
+  
+  # set tags
+  def tags_as_string=(value)
+    tags.clear
+    if value
+      value.split(',').each do |v|
+        tag_name = v.strip
+        tags << Tag.find_or_create_by_name(tag_name) unless tag_name.length == 0
+      end
+    end
+  end
+  
+  def tags_as_string
+    tags.collect(&:name).join(", ")
+  end
   ##############################################################################
   # Scopes
   ##############################################################################
