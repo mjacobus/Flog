@@ -13,6 +13,14 @@ class Post < ActiveRecord::Base
       tag.update_posts_count
     end
   end
+  
+  ##############################################################################
+  # Nested attributes
+  ##############################################################################
+  #  accepts_nested_attributes_for :tags,
+  #    :reject_if => :all_blank,
+  #    :allow_destroy => true
+ 
 
   ##############################################################################
   # Attatchements

@@ -114,6 +114,51 @@ describe Post do
         Post.published(:tag => @tag2.slug).length.should == 15
       end
     end
-  
   end
+  # publish with params
+  
+#  context "nested attributes" do
+#    context "tags" do
+#      before(:each) do
+#        @tag =  Factory(:tag)
+#        @tag2 = Factory(:tag)
+#        @post = Factory(:post, :tags =>[@tag, @tag2])
+#      end
+#    
+#      it "must create post with tags" do
+#        attrs = Factory.attributes_for(:post)
+#        attrs[:tags_attributes] = {
+#          1 => Factory.attributes_for(:tag),
+#          2 => Factory.attributes_for(:tag),
+#          3 => {:name => ''}
+#        }
+#        
+#        lambda{
+#          lambda{
+#            Post.create(attrs)
+#          }.should change(Post, :count).by(1)
+#        }.should change(Tag, :count).by(2)
+#      end
+#      
+#      it "must delete post tags" do
+#        attributes = @post.attributes
+#        attributes[:tags_attributes] = {
+#          1 => {:id => @tag.id, :_destroy => true}
+#        }
+#        
+#        lambda {
+#          @post.update_attributes(attributes)
+#        }.should change(Tag, :count).by(-1)
+#      end
+#      
+#      it "must create new tag on update" do
+#        attrs = @post.attributes
+#        attrs[:tags_attributes] = {1 => Factory.attributes_for(:tag)}
+
+#        lambda{
+#          @post.update_attributes(attrs)
+#        }.should change(Tag, :count).by(1)
+#      end
+#    end
+#  end  
 end
