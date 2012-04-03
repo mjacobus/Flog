@@ -3,13 +3,17 @@ ActiveAdmin.register Post do
   # form
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.object.publication_date = Time.now if f.object.new_record?
-    f.inputs do
+    f.inputs "Flog post" do
       f.input :publish
       f.input :publication_date
       f.input :title
       f.input :description
       f.input :file, :as => :file,
         :hint => f.template.image_tag(f.object.file.url(:medium))
+    end
+    
+    f.inputs "Meta info" do
+      f.input :tags_as_string
     end
     
     f.buttons
@@ -28,6 +32,9 @@ ActiveAdmin.register Post do
         
         row :description
         row :slug
+        row :tags do
+          post.tags_as_string
+        end
         row :created_at
         row :updated_at
       end
@@ -47,6 +54,7 @@ ActiveAdmin.register Post do
     
     column :title
     column :slug
+    column :tags_as_string, :sortable => false
     column :created_at
     column :updated_at
     column :file_updated_at
