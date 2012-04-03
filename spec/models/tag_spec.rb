@@ -28,9 +28,10 @@ describe Tag do
     before(:each) do
       @tag = Factory(:tag)
       1.upto(10) do
-        @tag.posts << Factory(:post)
+        @post = Factory(:post)
+        @post.tags << @tag
+        @post.save!
       end
-      @tag.save
     end
     
     it "should keep count of posts" do
@@ -45,7 +46,7 @@ describe Tag do
     end
     
     it "should decrease count of posts a tag post is destroyed" do
-      @tag.posts.first.destroy
+      @post.destroy
       @tag.posts_count.should == 9
     end
     
