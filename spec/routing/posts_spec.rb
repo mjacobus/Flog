@@ -106,7 +106,7 @@ describe PostsController do
       )
     end
     
-   it "GET /tag/the-tag-name should route to #index?tag=the-tag-name&page=1" do
+   it "GET /tag/the-tag-name should route to #index?tag=the-tag-name&page=7" do
       {:get => '/tag/the-tag-name/page/7'}.should route_to(
         :controller => 'posts',
         :action => 'index',

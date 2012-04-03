@@ -54,7 +54,7 @@ class Post < ActiveRecord::Base
   # will accept params: tag
   # list published posts
   def self.published(params = {})
-    query = where('publish = ?', true)   
+    query = includes(:tags).where('publish = ?', true)   
       .where('publication_date <= ?', Time.now)
       .order('publication_date DESC')
       
@@ -79,6 +79,12 @@ class Post < ActiveRecord::Base
       query = query.where('publication_date like ?', date )
     elsif init_date && end_date
       query = query.where('publication_date >= ? AND publication_date <= ?', init_date, end_date )
+    end
+    
+    # query by tag
+    tag = params[:tag] if params[:tag] 
+    if tag
+      query = query.where("tags.slug = ?", tag)
     end
     
     query

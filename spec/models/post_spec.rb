@@ -66,34 +66,53 @@ describe Post do
   end
   
   context "published() with params" do
-     before do
-      # considering today was 2012-03-19
-      1.upto(15) do |day|
-        # 15 1 year old posts + 15 unpublilshed
-        Factory(:post, :publication_date => "2011-03-#{day}")
-        Factory(:post, :publication_date => "2011-03-#{day}", :publish => false)
-        # 15 2 months old
-        Factory(:post, :publication_date => "2012-01-#{day}")
-        # + 30 2 months old posts  + 15 unpublished
-        Factory(:post, :publication_date => "2012-02-#{day}")
-        Factory(:post, :publication_date => "2012-02-#{day}")
-        Factory(:post, :publication_date => "2012-02-#{day}", :publish => false)
-        
-        # 15 posts in the future        
-        Factory(:post, :publication_date => 1.month.from_now)
+     context "with date" do
+       before do
+        # considering today was 2012-03-19
+        1.upto(15) do |day|
+          # 15 1 year old posts + 15 unpublilshed
+          Factory(:post, :publication_date => "2011-03-#{day}")
+          Factory(:post, :publication_date => "2011-03-#{day}", :publish => false)
+          # 15 2 months old
+          Factory(:post, :publication_date => "2012-01-#{day}")
+          # + 30 2 months old posts  + 15 unpublished
+          Factory(:post, :publication_date => "2012-02-#{day}")
+          Factory(:post, :publication_date => "2012-02-#{day}")
+          Factory(:post, :publication_date => "2012-02-#{day}", :publish => false)
+          
+          # 15 posts in the future        
+          Factory(:post, :publication_date => 1.month.from_now)
+        end
       end
-    end
+      
+      it "list(:year => '2011')).length should be 15" do
+        Post.published(:year => '2011').length.should == 15 
+      end
+      
+      it "list(:year => '2012', :month => 02)).length should be 30" do
+        Post.published(:year => '2012', :month => '02').length.should == 30
+      end
+      
+      it "list(:year => '2012', :month => 02, :day => '02')).length should be 16" do
+        Post.published(:year => '2012', :month => '02', :day => '02').length.should == 2
+      end
+     end
     
-    it "list(:year => '2011')).length should be 15" do
-      Post.published(:year => '2011').length.should == 15 
-    end
-    
-    it "list(:year => '2012', :month => 02)).length should be 30" do
-      Post.published(:year => '2012', :month => '02').length.should == 30
-    end
-    
-    it "list(:year => '2012', :month => 02, :day => '02')).length should be 16" do
-      Post.published(:year => '2012', :month => '02', :day => '02').length.should == 2
+    context "with tag" do
+      before do
+        @tag  = Factory(:tag)
+        @tag2 = Factory(:tag)
+        1.upto(15) do
+          Factory(:post)
+          Factory(:post, :tags => [@tag])
+          Factory(:post, :tags => [@tag, @tag2])
+        end
+      end
+      
+      it "must find published params by tag" do
+        Post.published(:tag => @tag.slug).length.should == 30
+        Post.published(:tag => @tag2.slug).length.should == 15
+      end
     end
   
   end

@@ -7,7 +7,7 @@ Factory.define :post do |f|
   f.file_file_size    1000
   f.file_updated_at   Time.now
   f.publish           true
-  f.sequence(:publication_date) {|n| 2.weeks.ago + n.days}
+  f.sequence(:publication_date) {|n| 2.years.ago + n.days}
 end
 
 Factory.define :tag do |f|
