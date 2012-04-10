@@ -34,6 +34,12 @@ describe Tag do
       end
     end
     
+    it "decrease @tag.posts_count after a tag is unlinked to a post" do
+      @post.tags.clear
+      @post.save!
+      @tag.posts_count.should == 9
+    end
+    
     it "should keep count of posts" do
       @tag.posts_count.should == 10
     end

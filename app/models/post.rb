@@ -3,7 +3,8 @@ class Post < ActiveRecord::Base
   # Relations and callbacks
   ##############################################################################  
   has_many :post_tags
-  has_many :tags, :through => :post_tags
+  has_many :tags, :through => :post_tags,
+    :after_remove => :decrease_tag_posts_count
   
   after_save    :update_tag_posts_count
   after_destroy :update_tag_posts_count
@@ -12,6 +13,10 @@ class Post < ActiveRecord::Base
     tags.each do |tag|
       tag.update_posts_count
     end
+  end
+  
+  def decrease_tag_posts_count(tag)
+    tag.update_posts_count
   end
   
   ##############################################################################
