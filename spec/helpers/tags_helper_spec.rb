@@ -17,9 +17,14 @@ describe TagsHelper do
   end
 
   context "link_to_tag" do
-    it "must link to /tag/tag-name" do
+    it "must link to /tag/tag-name and show posts counter" do
       @expected = link_to("#{@tag.name} (#{@tag.posts_count})","/tag/#{@tag.slug}")
       helper.link_to_tag(@tag).should == @expected
+    end
+    
+    it "must link to /tag/tag-name with no counter if second param is false" do
+      @expected = link_to(@tag.name,"/tag/#{@tag.slug}")
+      helper.link_to_tag(@tag,false).should == @expected
     end
   end
   

@@ -7,7 +7,7 @@
     <div class="image"><%= image_tag post.file.url(:medium), :alt => post.title, :title => post.title %></div>
     <div class="description"><p><%= simple_format(post.description) %></p></div>
     <div class="tags">
-      <p>Tags <strong><%= link_to_tags(post.tags) %></strong></p>
+      <p><strong>Tags:</strong> <%= link_to_tags(post.tags) %></p>
     </div>
     <div class="publication_date">
       <p>Posted on <strong><%= post.publication_date %></strong></p>
