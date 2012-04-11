@@ -10,7 +10,7 @@ module TagsHelper
   
   def link_to_tag(tag, include_counter = true)
     if include_counter
-      link_to("#{tag.name} (#{tag.posts_count})", "/tag/#{tag.slug}")
+      link_to(raw("#{tag.name} <span class=\"tag_posts_count\">(#{tag.posts_count})</span>"), "/tag/#{tag.slug}")
     else
       link_to(tag.name, "/tag/#{tag.slug}")
     end  

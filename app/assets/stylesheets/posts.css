@@ -5,6 +5,14 @@ body {
   font: 14px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
 }
 
+li {
+ list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 .wrapper {
   width: 800px;
   margin: 0 auto;
@@ -102,5 +110,42 @@ body {
 
 .pagination a {
   color:#557799 ;
+}
+
+.tags_menu {
+  background: white;
+  font-weight: bold; 
+  width: 80px;
+  float:right;
+  
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  
+  box-shadow: 5px 5px 5px #113355;
+  
+  padding: 10px;
+}
+
+.tags_menu .tag_posts_count {
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 21px;
+  vertical-align: middle;
+}
+.tags_menu ul {
+  float: left;
+  padding: 0;
+  margin: 0
+}
+
+.tags_menu li {
+  float: left;
+  min-width: 100px;
+  margin: 0 auto;
+}
+
+.tags_menu a{
+  color: #bb0000;
 }
 
