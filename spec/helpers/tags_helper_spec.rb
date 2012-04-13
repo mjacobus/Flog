@@ -18,7 +18,7 @@ describe TagsHelper do
 
   context "link_to_tag" do
     it "must link to /tag/tag-name and show posts counter" do
-      @expected = link_to("#{@tag.name} <span class=\"tag_posts_count\">(#{@tag.posts_count})</span>","/tag/#{@tag.slug}")
+      @expected = link_to(raw("#{@tag.name} <span class=\"tag_posts_count\">(#{@tag.posts_count})</span>"),"/tag/#{@tag.slug}")
       helper.link_to_tag(@tag).should == @expected
     end
     
