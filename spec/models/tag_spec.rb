@@ -21,7 +21,47 @@ describe Tag do
         @new_tag.should_not be_valid
         @new_tag.should have(1).errors_on(attr)        
       end
-      
+    end
+  end
+  
+  context "posts count cache" do
+    before(:each) do
+      @tag = Factory(:tag)
+      1.upto(10) do
+        @post = Factory(:post)
+        @post.tags << @tag
+        @post.save!
+      end
+    end
+    
+    it "decrease @tag.posts_count after a tag is unlinked to a post" do
+      @post.tags.clear
+      @post.save!
+      @tag.posts_count.should == 9
+    end
+    
+    it "should keep count of posts" do
+      @tag.posts_count.should == 10
+    end
+    
+    it "should increase count of posts when a tag is added to a post" do
+      @post = Factory(:post)
+      @post.tags << @tag
+      @post.save
+      @tag.posts_count.should == 11
+    end
+    
+    it "should decrease count of posts a tag post is destroyed" do
+      @post.destroy
+      @tag.posts_count.should == 9
+    end
+    
+    it "should destroy tag after destroying all of its posts" do
+      lambda {
+        @tag.posts.each do |post|
+          post.destroy
+        end
+      }.should change(Tag, :count).by(-1)
     end
   end
 end

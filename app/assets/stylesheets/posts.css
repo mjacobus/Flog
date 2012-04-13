@@ -5,8 +5,16 @@ body {
   font: 14px/1.4 "Helvetica Neue","HelveticaNeue",Helvetica,Arial,sans-serif;
 }
 
+li {
+ list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
 .wrapper {
-  width: 800px;
+  width: 1000px;
   margin: 0 auto;
 }
 
@@ -21,6 +29,7 @@ body {
 
 .header {
   font-size: 30px;
+  margin-bottom: 10px;
   -webkit-border-bottom-right-radius: 10px;
   -moz-border-bottom-right-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -34,7 +43,7 @@ body {
 }
 
 .content {
-  width: 800px;
+  width: 710px;
   float: left;
 }
 
@@ -80,7 +89,6 @@ body {
 }
 
 .pagination {
-  margin: 5px;
   float: right;
 }
 
@@ -104,3 +112,63 @@ body {
   color:#557799 ;
 }
 
+/* tags */
+.tags_menu {
+  background: white;
+  font-weight: bold; 
+  width: 125px;
+  float:right;
+  
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  
+  box-shadow: 5px 5px 5px #113355;
+  
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.tags_menu .tag_posts_count {
+  font-weight: normal;
+  font-size: 10px;
+  line-height: 21px;
+  vertical-align: middle;
+}
+.tags_menu ul {
+  float: left;
+  padding: 0;
+  margin: 0
+}
+
+.tags_menu li {
+  float: left;
+  min-width: 100px;
+  margin: 0 auto;
+}
+
+.tags_menu a{
+  color: #bb0000;
+}
+
+
+/* Sidebar */
+.sidebar {
+  width: 145px;
+    min-height: 50px;
+  float: left;
+}
+
+.sidebar div.block {
+  background: white;
+  min-height: 50px;
+  float: left;
+    margin: 0 0 10px 0;
+}
+
+div.block {
+  padding: 2px 15px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
