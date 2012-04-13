@@ -12,10 +12,22 @@
     <div class="header">
       <p>Simple Flog</p>
     </div>
-    <div class="tags_menu"><%= tags_menu %></div>
+    <div class="sidebar left"></div>
     <div class="content">
       <%= yield %>
-    </div>  
+    </div>
+    <div class="sidebar right">
+      <div class="block advertisement">
+        <p>This is an advertisement.</p>
+      </div>
+    
+      <div class="tags_menu"><%= tags_menu %></div>
+      
+      <div class="block advertisement">
+        <p>This is an advertisement.</p>
+      </div>
+      
+    </div>
     <div class="footer">
       <p>Thank you for your visit!</p>
     </div>  
