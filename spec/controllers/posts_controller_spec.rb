@@ -35,4 +35,19 @@ describe PostsController do
       assigns(:posts).length.should == 10
     end
   end
+  
+  context "GET show" do
+    before(:each) do
+      @post = Factory(:post)
+      get :show, {:slug => @post.slug}
+    end
+    
+    it "should be success" do
+      response.should be_success
+    end
+    
+    it "must assign @post" do
+      assigns(:post).id.should == @post.id
+    end
+  end
 end

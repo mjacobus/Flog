@@ -16,6 +16,7 @@ a {
 .wrapper {
   width: 1000px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .header, .footer {
@@ -160,10 +161,11 @@ a {
 }
 
 .sidebar div.block {
+  box-shadow: 5px 5px 5px #113355;
   background: white;
   min-height: 50px;
   float: left;
-    margin: 0 0 10px 0;
+  margin: 0 0 10px 0;
 }
 
 div.block {

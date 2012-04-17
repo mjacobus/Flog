@@ -7,4 +7,8 @@ class PostsController < ApplicationController
     per  = params[:limit] || 10
     @posts = Post.published(params).page(page).per(per)
   end
+  
+  def show
+    @post = Post.find_by_slug(params[:slug])
+  end
 end

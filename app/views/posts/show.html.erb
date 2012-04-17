@@ -1,0 +1,9 @@
+<% title(@post.title) %>
+  <div class="post">
+      <div class="image"><%= image_tag @post.file.url(:medium), :alt => @post.title, :title => @post.title %></div>
+    <div class="description"><p><%= description(@post) %></p></div>
+	<%= render :partial => "tags", :locals => {:post => @post} %>
+    <div class="publication_date">
+      <p>Posted on <strong><%= @post.publication_date %></strong></p>
+    </div>
+  </div>
