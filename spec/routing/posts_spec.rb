@@ -116,4 +116,13 @@ describe PostsController do
     end
   end
   
+  context "GET /post-slug" do
+    it "should redirect to show?slug=post-slug" do
+      {:get => '/post-slug'}.should route_to(
+        :controller => 'posts',
+        :action => 'show',
+        :slug => 'post-slug'
+      )
+    end 
+  end
 end

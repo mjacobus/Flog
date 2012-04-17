@@ -5,8 +5,16 @@
 <div class="posts">
 <% @posts.each do |post| %>
   <div class="post">
-    <h2><%= post.title %></h2>
-    <div class="image"><%= image_tag post.file.url(:medium), :alt => post.title, :title => post.title %></div>
+  
+    <%= link_to(post.slug) do %>
+      <h2><%= post.title %></h2>
+    <% end %>
+    
+    
+    <%= link_to(post.slug) do %>
+      <div class="image"><%= image_tag post.file.url(:medium), :alt => post.title, :title => post.title %></div>
+    <% end %>
+
     <div class="description"><p><%= simple_format(post.description) %></p></div>
     <div class="tags">
       <p><strong>Tags:</strong> <%= link_to_tags(post.tags.all) %></p>
@@ -14,6 +22,7 @@
     <div class="publication_date">
       <p>Posted on <strong><%= post.publication_date %></strong></p>
     </div>
+
   </div>
   <div class="post_separator"></div>
 <% end %>

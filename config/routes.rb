@@ -19,7 +19,9 @@ Flog::Application.routes.draw do
   match '/tag/:tag(/page/:page)' => "posts#index",
     :tag => /[\w-]+/, 
     :page => /\d{1,}/, 
-    :defaults => {:page => '1'}  
+    :defaults => {:page => '1'}
+    
+  match '/:slug' => "posts#show", :as => :post
 
 
   ActiveAdmin.routes(self)
