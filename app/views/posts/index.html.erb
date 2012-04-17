@@ -15,10 +15,10 @@
       <div class="image"><%= image_tag post.file.url(:medium), :alt => post.title, :title => post.title %></div>
     <% end %>
 
-    <div class="description"><p><%= simple_format(post.description) %></p></div>
-    <div class="tags">
-      <p><strong>Tags:</strong> <%= link_to_tags(post.tags.all) %></p>
-    </div>
+    <div class="description"><p><%= description(post) %></p></div>
+    
+	<%= render :partial => "tags", :locals => {:post => post} %>
+	
     <div class="publication_date">
       <p>Posted on <strong><%= post.publication_date %></strong></p>
     </div>

@@ -24,4 +24,9 @@ module PostsHelper
     end
   end
   
+  # format post description
+  def description(post) 
+    simple_format(post.description)
+  end
+  
 end

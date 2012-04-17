@@ -1,0 +1,5 @@
+<% if post.tags.all.size > 0 %>
+<div class="tags">
+	<p><strong>Tags:</strong> <%= link_to_tags(post.tags.all) %></p>
+</div>
+<% end %> 

@@ -1,10 +1,13 @@
 module TagsHelper
   def tags_menu(order = 'name')
-    ul = ['<ul class="tags">']
+    ul = ['<ul class="tags"><li>']
+    lis = [link_to("All", root_path)]
+    
     Tag.order(order).each do |tag|
-      ul << "<li>#{link_to_tag(tag)}</li>"
+      lis << link_to_tag(tag)
     end
-    ul <<"</ul>"
+    ul << lis.join('</li><li>')
+    ul <<"<li></ul>"
     raw ul.join("\n")
   end
   
