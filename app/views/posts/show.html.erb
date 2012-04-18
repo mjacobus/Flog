@@ -7,3 +7,7 @@
       <p>Posted on <strong><%= @post.publication_date %></strong></p>
     </div>
   </div>
+  
+  <div class="comments">
+    <%= render :partial => "comment_form", :locals => {:post => @post} %>
+  </div>
