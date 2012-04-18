@@ -9,7 +9,8 @@ describe String do
     "o" => %w(ô õ ò ó ö Ô Õ Ò Ó Ö),
     "u" => %w(û ũ ù ú ü Û Ũ Ù Ú Ü),
     "c" => %w(ç Ç),
-    "double-spaces" => [" double-spaces  "] 
+    "double-spaces" => [" double-spaces  "],
+    "double-spaces" => ["!@ double   spaces # "]  
   }.each do |slugged, values|
     values.each do |value|
       context "'#{value}'.to_slug" do
