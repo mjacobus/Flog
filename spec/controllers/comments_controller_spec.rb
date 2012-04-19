@@ -2,7 +2,9 @@ require 'spec_helper'
 
 describe CommentsController do
   def valid_params
-    Factory.attributes_for(:comment)
+    attributes = Factory.attributes_for(:comment)
+    attributes[:post_id] = Factory(:post).id
+    {:comment => attributes}
   end
   
   describe "POST /create" do
@@ -20,7 +22,11 @@ describe CommentsController do
     end
     
     context "with invalid params" do
-      pending "Finish this test"
+      it "must rerender the post form" do
+        Comment.any_instance.stub(:valid).and_return(false)
+        post :create, {}
+        response.should render_template("posts/show")
+      end
     end
   end
 end
