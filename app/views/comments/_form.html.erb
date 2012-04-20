@@ -1,5 +1,6 @@
 <div class="form">
-	<%= semantic_form_for(@post.comments.last) do |f| %>
+	<%= semantic_form_for(@post.comments.last, 
+	  :url => "#{comments_path}#new_comment") do |f| %>
 		<%= f.inputs :name => 'Tell me what you think' do %>
 			<%= f.input :post_id, :as => :hidden %>
 			<%= f.input :name, :placeholder => "Type your name" %>
