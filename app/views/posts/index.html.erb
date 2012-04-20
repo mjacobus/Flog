@@ -22,6 +22,14 @@
     <div class="publication_date">
       <p>Posted on <strong><%= post.publication_date %></strong></p>
     </div>
+    
+    <% if post.comments_count > 0 %>
+      <%= link_to(post_path(post.slug) + "#comments") do %>
+        <div class="commetns counter"><%= pluralize(post.comments_count, 'comment') %></div>
+      <% end %>
+    <% end %>
+    
+    
 
   </div>
   <div class="post_separator"></div>

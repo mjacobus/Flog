@@ -8,10 +8,9 @@
     </div>
   </div>
   
-  <div class="comments">
-    <%= render :partial => "comments/form", :locals => {:post => @post} %>
-    
+  <div class="comments" id="comments">
     <%= render :partial => "posts/comments", :locals => {:post => @post} %>
+    <%= render :partial => "comments/form", :locals => {:post => @post} %>
   </div>
   
 
