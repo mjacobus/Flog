@@ -1,0 +1,17 @@
+  <% @post.comments.each do |comment| %>
+    <% if comment.id.present? %>
+    <div class="comment">
+      <div class="author">
+        <%= comment.name %> said
+          <div class="time">
+            on <%= comment.created_at %>:
+          </div>
+      </div>
+    
+      <div class="content">
+        <%= comment.content %>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+
