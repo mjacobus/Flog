@@ -31,7 +31,7 @@ describe PostsController do
     end
     
     it "should have @posts.length == 10" do
-      get :index
+      get :index, {:limit => 10}
       assigns(:posts).length.should == 10
     end
   end

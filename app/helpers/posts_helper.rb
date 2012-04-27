@@ -17,10 +17,10 @@ module PostsHelper
           title("#{params[:year]}")
         end
       else
-        title("All posts")  
+        title(t("All posts"))  
       end
     else
-      title "No posts found"
+      title t("No posts found")
     end
   end
   

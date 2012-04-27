@@ -1,7 +1,7 @@
 module TagsHelper
   def tags_menu(order = 'name')
     ul = ['<ul class="tags"><li>']
-    lis = [link_to("All", root_path)]
+    lis = [link_to(t("All"), root_path)]
     
     Tag.order(order).each do |tag|
       lis << link_to_tag(tag)
