@@ -4,7 +4,8 @@
     <div class="description"><p><%= description(@post) %></p></div>
 	<%= render :partial => "posts/tags", :locals => {:post => @post} %>
     <div class="publication_date">
-      <p>Posted on <strong><%= @post.publication_date %></strong></p>
+      <p><%= t("commented on") %> <span class="time"><%= @post.created_at %>:</span></p>
+      </div>
     </div>
   </div>
   

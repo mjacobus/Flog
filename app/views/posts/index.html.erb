@@ -20,7 +20,7 @@
 	<%= render :partial => "tags", :locals => {:post => post} %>
 	
     <div class="publication_date">
-      <p>Posted on <strong><%= post.publication_date %></strong></p>
+            <p><%= t("posted on") %> <span class="time"><%= post.created_at %>:</span></p>
     </div>
     
     <% if post.comments_count > 0 %>
