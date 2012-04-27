@@ -1,5 +1,5 @@
 ActiveAdmin.register Post do
-
+  menu :priority => 1
   # form
   form :html => { :enctype => "multipart/form-data" } do |f|
     f.object.publication_date = Time.now if f.object.new_record?
@@ -44,21 +44,24 @@ ActiveAdmin.register Post do
   
   # index
   index do
-    column :publish
-    column :publication_date
     column "File" do |post|
       div :class => "logo thumb" do
         img :src => post.file.url(:thumb), :alt => post.title, :title => post.title
       end
     end
     
-    column :title
+    column :title, :sortable => :title do |post|
+      link_to(post.title, post_url(post.slug), :target => :blank)
+    end
     column :slug
     column :tags_as_string, :sortable => false
+    
+    column :publish
+    column :publication_date
     column :created_at
     column :updated_at
     column :file_updated_at
-    
+   
     default_actions
   end
   

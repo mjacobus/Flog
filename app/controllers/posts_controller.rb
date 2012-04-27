@@ -10,5 +10,6 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find_by_slug(params[:slug])
+    @post.comments.build
   end
 end

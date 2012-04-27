@@ -14,3 +14,10 @@ Factory.define :tag do |f|
   f.sequence(:name) {|n| "tag #{n}"}
   f.sequence(:slug) {|n| "tag-#{n}"}
 end
+
+Factory.define :comment do |f|
+  f.sequence(:email)   {|n| "email#{n}@example.com"}
+  f.sequence(:name)    {|n| "Name #{n}@example.com"}
+  f.sequence(:content) {|n| "The post content ##{n}"}
+  f.association :post
+end
